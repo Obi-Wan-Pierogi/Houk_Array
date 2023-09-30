@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Houk_Array
 {
@@ -10,7 +11,7 @@ namespace Houk_Array
             // Create a new array, stopwatch, and random object
             char[] charArray = new char[50];
             Stopwatch sw = new Stopwatch();
-            Random rand = new Random();
+            Random r = new Random();
 
             // Start the stopwatch
             sw.Start();
@@ -20,17 +21,13 @@ namespace Houk_Array
 
             while (i < charArray.Length)
             {
-                //Generate a random uppercase char
-                char randomChar = (char)rand.Next('A', 'Z' + 1);
-                //Check if the char doesn't exist and add it
-                if (Array.IndexOf(charArray, randomChar) == -1)
-                {
-                    charArray[i] = randomChar;
-                    i++;
-                }
+                //Generate a random char
+                char randomChar = (char)r.Next(65, 123);
 
-                //Generate a random lowercase char
-                randomChar = (char)rand.Next('a', 'z' + 1);
+                //Check if randomChar is an alpha character, if not change it to one
+                if (randomChar > 90 && randomChar < 97) 
+                    randomChar = (char)(randomChar + 7);
+
                 //Check if the char doesn't exist and add it
                 if (Array.IndexOf(charArray, randomChar) == -1)
                 {
